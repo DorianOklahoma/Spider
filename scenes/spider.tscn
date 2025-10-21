@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://bro7sxcbbyjdh"]
+
+[ext_resource type="Script" uid="uid://d1fo5nmyckggb" path="res://scripts/Spider.cs" id="1_algeo"]
+[ext_resource type="Texture2D" uid="uid://d32p34lhalnnr" path="res://assets/spider_sheet.png" id="2_k5hg5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5hg5"]
+atlas = ExtResource("2_k5hg5")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_047qd"]
+atlas = ExtResource("2_k5hg5")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d613k"]
+atlas = ExtResource("2_k5hg5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evcmw"]
+atlas = ExtResource("2_k5hg5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txxy0"]
+atlas = ExtResource("2_k5hg5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdplg"]
+atlas = ExtResource("2_k5hg5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_047qd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5hg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_047qd")
+}],
+"loop": false,
+"name": &"bite",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d613k")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evcmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txxy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdplg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txxy0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c7em6"]
+radius = 35.0
+height = 144.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k5hg5"]
+radius = 35.0
+height = 160.0
+
+[node name="spider" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_algeo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -5)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_047qd")
+animation = &"bite"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_c7em6")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_k5hg5")
+metadata/_edit_lock_ = true
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+
+[node name="Timer" type="Timer" parent="Navigation"]
+wait_time = 0.1
+autostart = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="animation_finished"]
+[connection signal="body_entered" from="AttackArea" to="." method="OnBodyEntered"]
+[connection signal="timeout" from="Navigation/Timer" to="." method="OnTimerTimeout"]

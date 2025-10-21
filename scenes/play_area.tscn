@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://db1qr25tkmwua"]
+
+[ext_resource type="PackedScene" uid="uid://bkglb8bl34t08" path="res://scenes/area.tscn" id="1_gtu41"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_gtu41"]
+vertices = PackedVector2Array(1379, 397, 1261, 397, 1043, 371, 1043, 253, 1379, 611, 1645, 563, 1763, 563, 1715, 685, 1453, 685, 1907, 1139, 2257, 1249, 1331, 1249, 1645, 1139, 1763, 445, 2257, 47, 1907, 1021, 1715, 803, 1331, 995, 1645, 1021, 1667, 995, 1645, 445, 947, 755, 1261, 611, 1453, 803, 1261, 877, 1117, 925, 877, 973, 947, 637, 1261, 925, 1117, 973, 877, 1021, 781, 1021, 397, 755, 781, 1069, 685, 1069, 685, 1117, 637, 1117, 637, 1165, 541, 1165, 541, 1213, 493, 1213, 47, 47, 493, 1249, 47, 1249, 733, 371, 397, 637, 1667, 877, 733, 253)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(6, 13, 14, 10), PackedInt32Array(6, 10, 15, 16, 7), PackedInt32Array(12, 11, 17, 18), PackedInt32Array(18, 17, 19, 15), PackedInt32Array(5, 4, 0, 20), PackedInt32Array(21, 22, 4, 8, 23, 24, 25, 26), PackedInt32Array(1, 22, 21, 27, 2), PackedInt32Array(24, 28, 25), PackedInt32Array(25, 29, 26), PackedInt32Array(26, 30, 31, 32), PackedInt32Array(31, 33, 34, 32), PackedInt32Array(34, 35, 36, 32), PackedInt32Array(36, 37, 38, 32), PackedInt32Array(38, 39, 40, 41, 32), PackedInt32Array(40, 42, 43, 41), PackedInt32Array(44, 2, 27, 45), PackedInt32Array(15, 19, 46, 16), PackedInt32Array(10, 9, 15), PackedInt32Array(23, 16, 46, 24), PackedInt32Array(32, 21, 26), PackedInt32Array(45, 32, 41), PackedInt32Array(44, 45, 41, 47), PackedInt32Array(47, 41, 14, 3), PackedInt32Array(0, 3, 14, 13, 20)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(2304, 2, 2302, 1294, 1, 1295, 2, 1)])
+agent_radius = 32.0
+
+[node name="play_area" type="NavigationRegion2D"]
+navigation_polygon = SubResource("NavigationPolygon_gtu41")
+
+[node name="area" parent="." instance=ExtResource("1_gtu41")]

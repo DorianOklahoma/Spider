@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh5o1trfek1ph"]
+
+[ext_resource type="PackedScene" uid="uid://db1qr25tkmwua" path="res://scenes/play_area.tscn" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bro7sxcbbyjdh" path="res://scenes/spider.tscn" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cqt4hmps775tv" path="res://scenes/player.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://ffr0jqnsixjb" path="res://scenes/hud.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bum4sbtyxcwqs" path="res://scenes/health_plus_one.tscn" id="5_tbgi4"]
+
+[node name="main" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("4_jyhfs")]
+
+[node name="play_area" parent="." instance=ExtResource("1_sugp2")]
+
+[node name="player" parent="." instance=ExtResource("3_tbgi4")]
+position = Vector2(900, 234)
+
+[node name="spider" parent="." node_paths=PackedStringArray("Target", "Home") instance=ExtResource("2_jyhfs")]
+position = Vector2(509, 402)
+Target = NodePath("../player")
+Home = NodePath("../SpiderHome")
+
+[node name="SpiderHome" type="Node2D" parent="."]
+position = Vector2(459, 241)
+
+[node name="HealthPlusOne" parent="." instance=ExtResource("5_tbgi4")]
+position = Vector2(1320, 295)
